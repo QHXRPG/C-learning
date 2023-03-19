@@ -1,2 +1,2 @@
-# 2-23-C-learning-
-c语言学习，2月23日
+# C-learning-
+c语言学习，随笔
