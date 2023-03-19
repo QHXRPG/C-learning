@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "2_14.h"
+#include "2_25.h"
 #include "string.h"
+#include "3_13.h"
+#include "3_19.h"
 #include "/Users/qiuhaoxuan/miniforge3/include/python3.10/Python.h"
 
 void test1()
@@ -39,7 +42,7 @@ void test2()
     }
 }
 
-void bubble_sort(int *p, int len)
+void bubble_sort_(int *p, int len)
 {
     int tmp;
     for(int i=0;i<len;i++)
@@ -61,15 +64,54 @@ void print_arr_1(int *p,int len)
 {
     for(int i=0;i<len;i++)
     {
-        printf("%d ",p[i]);
+        printf("%c ",p[i]);
     }
     printf("\n");
 }
 
+int cmp_int(const void*p1, const void*p2)
+{
+    printf("%d - %d\n", *(int *)p1,*(int *)p2);
+    return *(int *)p1 - *(int*)p2;
+}
+void Swap(char *buf1, char *buf2, int width)
+{
+    int i=0;
+    for(i=0; i<width; i++)
+    {
+        char tmp = *buf1;
+        *buf1 = *buf2;
+        *buf2 = tmp;
+        buf1++;
+        buf2++;
+    }
+}
 
+void bubble_sort(void *base, size_t num, size_t width, int (*cmp)(const void *p1, const void *p2))
+{
+    size_t i=0;
+    for(i=0; i<num-1; i++)
+    {
+        size_t j=0;
+        for(j=0; j<num-1;j++)
+        {
+            if(cmp((char*)base+j*width, (char *)base+(j+1)*width)>0)
+            {
+                Swap((char*)base+j*width, (char *)base+(j+1)*width, width);
+            }
+        }
 
+    }
+}
+
+void test3()
+{
+    int a[3][5] = {5, 4, 3, 2, 1,5,44,3,2,
+                   1,5,4,3,2,1};
+    int *p = (int*)(&a[1]);
+    printf("%d\n",*(p+1));
+}
 int main()
 {
-    int a[]={1,2,3,4,5};
-    int (*p)[]=&a;
+    test3_19_7();
 }
